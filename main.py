@@ -1,22 +1,24 @@
 import random
 from art import logo, thanks
 import os
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+from typing import List
+
+cards: List[int] = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 os.system("cls" if os.name == "nt" else "clear" )
 print(logo)
-start_game = input("Welcome to Blackjack game!\nDo you want to start? y/n ")
+start_game: str = input("Welcome to Blackjack game!\nDo you want to start? y/n ")
 
 if start_game != "y":
     print("Alright, see you next time!")
     exit()
 
 
-play_again = True
+play_again: bool = True
 
-def ask_again():
+def ask_again() -> bool:
     global play_again
-    again = input("Do you want to play again? y/n ") 
+    again: str = input("Do you want to play again? y/n ") 
     if again != "y":
         os.system("cls" if os.name == "nt" else "clear")
         print(thanks)
@@ -24,16 +26,15 @@ def ask_again():
     return play_again        
 
 
-
 while play_again:
     os.system("cls" if os.name== "nt" else "clear")
     print(logo)
-    your_cards = random.choices(cards, k=2)
-    dealer_cards = random.choices(cards, k=1)
+    your_cards: List[int] = random.choices(cards, k=2)
+    dealer_cards: List[int] = random.choices(cards, k=1)
     print(f"Your cards are {your_cards} and the value is {sum(your_cards)}.")
     print(f"Dealer card is {dealer_cards}.")
 
-    another_card = True
+    another_card: bool = True
 
     if sum(your_cards) == 21:
         print("\nBlackjack! You won!")
@@ -42,9 +43,8 @@ while play_again:
         ask_again()
         
 
-
     while another_card:
-        get_another_card = input("Type 'y' to get another card, type 'n' to pass: ")
+        get_another_card: str = input("Type 'y' to get another card, type 'n' to pass: ")
         if get_another_card == "y":
             your_cards.append(random.choice(cards))
             if sum(your_cards) > 21:
